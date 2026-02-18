@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+gunicorn
+pydantic
+sqlalchemy
+psycopg2-binary
+python-dotenv
+aiosmtplib
+pydantic-settings
+alembic
+razorpay
+phonenumbers
+
+
