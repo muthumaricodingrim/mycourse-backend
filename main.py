@@ -32,6 +32,10 @@ else:
 
 app = FastAPI()
 
+origins = [
+    "https://codingrim.com/apply/courses/aicourse/", 
+    "https://www.codingrim.com/apply/courses/aicourse",  # Your MilesWeb domain
+]
 # Enable CORS to allow requests from the React Frontend
 app.add_middleware(
     CORSMiddleware,
