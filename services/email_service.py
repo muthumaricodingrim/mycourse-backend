@@ -51,13 +51,11 @@ def send_email(to_email: str, subject: str, body: str) -> None:
     """Sends an email using the Gmail API."""
     sender = os.getenv("GMAIL_SENDER")
     if not sender:
-        logger.error("GMAIL_SENDER missing in .env")
-        return
+        raise ValueError("GMAIL_SENDER missing in .env")
 
     service = get_gmail_service()
     if not service:
-        logger.error("Gmail service not available. Email not sent.")
-        return
+        raise RuntimeError("Gmail service not available. Check your credentials and refresh token.")
 
     try:
         message = MIMEText(body)
@@ -74,5 +72,7 @@ def send_email(to_email: str, subject: str, body: str) -> None:
         logger.info(f"Email sent successfully to {to_email} using Gmail API")
     except HttpError as error:
         logger.error(f"An error occurred while sending email via Gmail API: {error}")
+        raise
     except Exception as e:
-        logger.info(f"Unexpected error: {e}")
+        logger.error(f"Unexpected error while sending email: {e}")
+        raise
